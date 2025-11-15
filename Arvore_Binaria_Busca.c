@@ -75,20 +75,6 @@ void inOrder(No *raiz) {
     inOrder(raiz->dir);
 }
 
-void imprimirArvore(No *raiz, int nivel) {
-    if (raiz == NULL)
-        return;
-
-    imprimirArvore(raiz->dir, nivel + 1);
-
-    for (int i = 0; i < nivel; i++)
-        printf("    ");
-
-    printf("%d\n", raiz->id);
-
-    imprimirArvore(raiz->esq, nivel + 1);
-}
-
 void liberarArvore(No *raiz) {
     if (raiz == NULL) {
         return; 
@@ -137,3 +123,4 @@ int main() {
 
 
  
+
