@@ -17,7 +17,7 @@ Estes são os projetos mais complexos que demonstram meu conhecimento em gerenci
 * **Conceitos aplicados:** Refatoração de código (separação de responsabilidades em funções), passagem de parâmetros por referência (ponteiros) e lógica de análise (min/max, pares/ímpares).
 
 ### 3. Arvore_Binaria_Busca.c
-* **O que faz:** (Em desenvolvimento) Implementação de uma Árvore Binária de Busca (BST) para inserção e busca de dados.
+* **O que faz:** Implementação de uma Árvore Binária de Busca (BST) para inserção e busca de dados.
 * **Conceitos aplicados:** Estrutura de dados não-linear, recursividade e gerenciamento de ponteiros complexos.
 
 ---
