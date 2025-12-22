@@ -20,7 +20,10 @@ Estes são os projetos mais complexos que demonstram meu conhecimento em gerenci
 * **O que faz:** Implementação de uma Árvore Binária de Busca (BST) para inserção e busca de dados.
 * **Conceitos aplicados:** Estrutura de dados não-linear, recursividade e gerenciamento de ponteiros complexos.
 
----
+### 4. O_Sistema_de_Dano.c
+* **O que faz:** O que faz: Simulação de um sistema de combate RPG baseado em turnos. Permite gerenciar atributos de múltiplos personagens (Herói e Inimigos), realizar ações de cura e escolher
+alvos específicos para ataques com cálculo de dano aleatório (fator sorte/dados).
+* **Conceitos aplicados:** Manipulação de Structs (registros), aritmética de Ponteiros para alteração direta de memória, Vetores de Structs, manipulação de Strings (string.h) e geração de números pseudoaleatórios (rand/srand).
 
 ## 📚 Exercícios e Fundamentos
 
