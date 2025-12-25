@@ -5,14 +5,18 @@
 
 typedef struct {
     char nome[20];
+    char sexo;
     int vida;
+    int max_vida;
     int defesa;
+    int forca;
 } Personagem;
 
 void inicializar(Personagem *p, char *n, int v, int d) {
     
     strcpy(p->nome, n);
     p->vida = v;
+    p->max_vida = v;
     p->defesa = d;
 }
 
@@ -25,10 +29,71 @@ void receberCura(Personagem *p, int cura){
 
     p->vida = p->vida + cura;
 
-    if(p->vida > 100){
-        p->vida = 100;
+    if(p->vida > p->max_vida){
+        p->vida = p->max_vida;
     }
 }
+
+void criarHeroi(Personagem *p){
+    printf("--- CRIACAO DE PERSONAGEM ---\n");
+    printf("Digite o nome do heroi: ");
+    scanf("%s", p->nome);
+
+    printf("Digite o sexo (M/F): ");
+    scanf(" %c", &p->sexo);
+
+    int pontos = 10;
+    int escolha;
+    int qtd;
+
+    p->vida = 100;
+    p->defesa = 40;
+    p->forca = 35;
+
+
+    while(pontos > 0){
+        printf("\nVoce tem %d pontos para distribuir.\n", pontos);
+        printf("Atributos Atuais -> Vida: %d | Defesa: %d | Forca: %d\n", p->vida, p->defesa, p->forca);
+        printf("Onde quer investir?\n");
+        printf("1. Vida (+10 por ponto)\n");
+        printf("2. Defesa (+1 por ponto)\n");
+        printf("3. Forca (+1 por ponto)\n");
+        printf("Escolha: ");
+        scanf("%d", &escolha);
+
+        printf("Quantos pontos quer gastar nisso? ");
+        scanf("%d", &qtd);
+
+        if(qtd > pontos){
+            printf("Voce nao tem mais pontos suficientes!\n");
+        }else if(qtd <= 0){
+            printf("Valor invalido!\n");
+        }else{
+            pontos = pontos - qtd;
+
+        switch(escolha){
+            case 1:
+                p->vida += (qtd * 10);
+                break;
+            case 2:
+                p->defesa += qtd;
+                break;
+            case 3:
+                p->forca += qtd;
+                break;
+            default:
+                printf("Opcao invalida, pontos devolvidos.\n");
+                pontos = pontos + qtd;
+                break;
+            }
+        }
+    }
+
+    p->max_vida = p->vida;
+
+    printf("\n--- PERSONAGEM CRIADO COM SUCESSO! ---\n");
+}
+
 
 int main() {
 
@@ -36,7 +101,7 @@ int main() {
 
     Personagem heroi;
 
-    inicializar(&heroi, "Heroi", 100, 10);
+    criarHeroi(&heroi);
 
     Personagem *p;
     p = &heroi;
@@ -79,10 +144,10 @@ int main() {
     if(id_alvo >= 0 && id_alvo < 3){
         printf("Pow! Voce atacou o %s\n", inimigos[id_alvo].nome);
 
-        int forca_ataque = (rand() % 20) + 1;
+        int dano_final = heroi.forca + (rand() % 6);
 
-        printf("Rolando dados... Dado Gerado: %d!\n", forca_ataque);
-        tomarDano(&inimigos[id_alvo], forca_ataque);
+        printf("Atacando com forca %d + dado... Total: %d!\n", heroi.forca, dano_final);
+        tomarDano(&inimigos[id_alvo], dano_final);
 
         printf("O %s gritou de dor! Vida restante: %d\n", inimigos[id_alvo].nome, inimigos[id_alvo].vida);
     } else {
