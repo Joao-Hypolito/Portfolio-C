@@ -34,6 +34,57 @@ void receberCura(Personagem *p, int cura){
     }
 }
 
+void OpcoesDeAtaque(Personagem *p, Personagem inimigos[]){
+
+    int escolha;
+    int id_alvo;
+
+        printf("\n---SEU TURNO---\n");
+        printf("1. Ataque básico\n");
+        printf("2. Curar\n");
+        printf("3. Intimidar\n");
+        printf("4. Ataque Perfurante\n");
+        printf("Escolha seu proximo movimento: \n");
+        scanf("%d", &escolha);
+
+        switch(escolha){
+            case 1:
+                printf("Atacar quem? (0: Goblin, 1: Orc, 2: Troll): ");
+                scanf("%d", &id_alvo);
+
+                if(id_alvo >= 0 && id_alvo < 3){
+                    int dano_final = p->forca + (rand() % 6);
+                printf("Voce atacou com forca %d! Dano total: %d\n", p->forca, dano_final); 
+                
+                    tomarDano(&inimigos[id_alvo], dano_final);
+                printf("Vida do %s caiu para %d.\n", inimigos[id_alvo].nome, inimigos[id_alvo].vida);               
+                } else {
+                    printf("Voce errou o alvo!\n");
+                }
+
+            case 2: {
+                int valor_cura = 30;
+                
+                receberCura(p, valor_cura);
+
+                printf("Voce bebeu uma pocao! Vida atual: %d / %d\n", p->vida, p->max_vida);
+                break;
+            }    
+            case 3:    
+                printf("Voce tentou intimidar, mas ainda nao aprendeu essa habilidade...\n");
+                break;
+
+            case 4:
+                printf("Voce tentou furar a armadura, mas falhou...\n");
+                break;
+                
+            default:
+                printf("Voce tropecou e perdeu a vez!\n");
+                break;
+    }
+
+}
+
 void criarHeroi(Personagem *p){
     printf("--- CRIACAO DE PERSONAGEM ---\n");
     printf("Digite o nome do heroi: ");
@@ -112,51 +163,11 @@ int main() {
     inicializar(&inimigos[1], "Orc", 40, 3); // Monstro B
     inicializar(&inimigos[2], "Troll", 80, 8); // Monstro C
 
-    int dano;
-    int cura;
+    OpcoesDeAtaque(p, inimigos);
 
-    printf("Vida antes da batalha: %d\n", heroi.vida);    
-
-    printf("Quanto de dano o heroi recebeu?\n");
-    scanf("%d", &dano);
-    
-    tomarDano(p, dano); 
-
-    printf("Vida depois de tomar %d de dano: %d\n",dano, heroi.vida);
-
-    printf("Quanto de cura o heroi recebeu?\n");
-    scanf("%d", &cura);    
-
-    receberCura(p, cura);
-
-    printf("Vida depois de receber %d de cura: %d\n",cura, heroi.vida);
-
-    if (heroi.vida <= 0) {
-        printf("O heroi caiu!\n");
-    }
-
-    int id_alvo;
-
-    printf("\n--- HORA DO ATAQUE ---\n");
-    printf("Quem o %s vai atacar? (0: Goblin, 1: Orc, 2: Troll): ", heroi.nome);
-    scanf("%d", &id_alvo);
-
-    if(id_alvo >= 0 && id_alvo < 3){
-        printf("Pow! Voce atacou o %s\n", inimigos[id_alvo].nome);
-
-        int dano_final = heroi.forca + (rand() % 6);
-
-        printf("Atacando com forca %d + dado... Total: %d!\n", heroi.forca, dano_final);
-        tomarDano(&inimigos[id_alvo], dano_final);
-
-        printf("O %s gritou de dor! Vida restante: %d\n", inimigos[id_alvo].nome, inimigos[id_alvo].vida);
-    } else {
-        printf("Voce atacou o vento! (Alvo invalido)\n");
-    }
-
-    int i;
-    for(i = 0; i < 3; i++) {
-        printf("Monstro %s | Vida: %d\n", inimigos[i].nome , inimigos[i].vida);
+    printf("\n---STATUS APOS SEU TURNO ---\n");
+    for(int i = 0; i < 3; i++){
+        printf("%s / Vida: %d\n", inimigos[i].nome, inimigos[i].vida);
     }
 
     return 0;
