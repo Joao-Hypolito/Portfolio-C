@@ -12,17 +12,24 @@ typedef struct {
     int forca;
 } Personagem;
 
-void inicializar(Personagem *p, char *n, int v, int d) {
+void inicializar(Personagem *p, char nome[], int v, int f) {
     
-    strcpy(p->nome, n);
+    strcpy(p->nome, nome);
     p->vida = v;
     p->max_vida = v;
-    p->defesa = d;
+
+    p->forca = f;
+
+    p->defesa = 0;
 }
 
 void tomarDano(Personagem *p, int dano) {
 
     p->vida = p->vida - dano;
+
+    if(p->vida < 0){
+        p->vida = 0;
+    }
 }
 
 void receberCura(Personagem *p, int cura){
@@ -61,6 +68,7 @@ void OpcoesDeAtaque(Personagem *p, Personagem inimigos[]){
                 } else {
                     printf("Voce errou o alvo!\n");
                 }
+                break;
 
             case 2: {
                 int valor_cura = 30;
@@ -85,6 +93,27 @@ void OpcoesDeAtaque(Personagem *p, Personagem inimigos[]){
 
 }
 
+void AtaqueInimigos(Personagem *heroi, Personagem inimigos[]){
+
+    printf("\n---TURNO DOS INIMIGOS---\n");
+
+    for(int i = 0; i < 3; i++){
+        if(inimigos[i].vida > 0){
+
+            int dano = inimigos[i].forca + (rand() % 4);
+
+            printf("O %s atacou voce!\n", inimigos[i].nome);
+
+            tomarDano(heroi, dano);
+
+            printf("Voce tomou %d de dano. Vida restante: %d/%d\n", dano, heroi->vida, heroi->max_vida);
+            printf("\n");
+
+        }
+    }
+
+}
+
 void criarHeroi(Personagem *p){
     printf("--- CRIACAO DE PERSONAGEM ---\n");
     printf("Digite o nome do heroi: ");
@@ -105,7 +134,9 @@ void criarHeroi(Personagem *p){
     while(pontos > 0){
         printf("\nVoce tem %d pontos para distribuir.\n", pontos);
         printf("Atributos Atuais -> Vida: %d | Defesa: %d | Forca: %d\n", p->vida, p->defesa, p->forca);
+        printf("\n");
         printf("Onde quer investir?\n");
+        printf("\n");
         printf("1. Vida (+10 por ponto)\n");
         printf("2. Defesa (+1 por ponto)\n");
         printf("3. Forca (+1 por ponto)\n");
@@ -163,11 +194,40 @@ int main() {
     inicializar(&inimigos[1], "Orc", 40, 3); // Monstro B
     inicializar(&inimigos[2], "Troll", 80, 8); // Monstro C
 
-    OpcoesDeAtaque(p, inimigos);
+    int batalha_continua = 1;
 
-    printf("\n---STATUS APOS SEU TURNO ---\n");
-    for(int i = 0; i < 3; i++){
-        printf("%s / Vida: %d\n", inimigos[i].nome, inimigos[i].vida);
+    while(batalha_continua == 1) {
+
+        printf("/n--- SITUACAO DA BATALHA ---\n");
+        printf("Heroi: %d/%d HP\n", heroi.vida, heroi.max_vida);
+        for(int i = 0; i < 3; i++){
+            if(inimigos[i].vida > 0){
+                printf("[%d] %s: %d HP\n", i, inimigos[i].nome, inimigos[i].vida);
+            } else{
+                printf("[%d] %s: DERROTADO!\n", i, inimigos[i].nome);
+            }
+        }
+        OpcoesDeAtaque(p, inimigos);
+
+        int inimigos_vivos = 0;
+        for(int i = 0; i < 3; i++){
+            if(inimigos[i].vida > 0){
+                inimigos_vivos++;
+            }
+        }
+
+        if(inimigos_vivos == 0){
+            printf("\n--- VITORIA! TODOS OS INIMIGOS FORAM DERROTADOS! ---\n");
+            batalha_continua = 0;
+            break;
+        }
+
+        AtaqueInimigos(p, inimigos);
+
+        if(heroi.vida <= 0) {
+            printf("\nO heroi caiu em combate!");
+            batalha_continua = 0;
+        }
     }
 
     return 0;
