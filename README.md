@@ -31,6 +31,5 @@ eixos, tudo controlado por um menu interativo com sistema de proteção contra e
 * **Conceitos aplicados:** Manipulação de Structs, passagem de parâmetros por referência (Ponteiros), controle de fluxo (Loop while e switch), Lógica de Estados (Flags), uso de continue para
 otimização de fluxo e Programação Defensiva (tratamento de memória não inicializada e validação de inputs).
 
-## 📚 Exercícios e Fundamentos
+## 📚 Fundamentos
 
-A pasta `Exercicios_Logica` contém implementações de algoritmos clássicos e conceitos fundamentais de C (Listas Ligadas, Fatorial, Fibonacci, etc.).
