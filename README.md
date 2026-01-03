@@ -25,6 +25,12 @@ Estes são os projetos mais complexos que demonstram meu conhecimento em gerenci
 alvos específicos para ataques com cálculo de dano aleatório (fator sorte/dados).
 * **Conceitos aplicados:** Manipulação de Structs (registros), aritmética de Ponteiros para alteração direta de memória, Vetores de Structs, manipulação de Strings (string.h) e geração de números pseudoaleatórios (rand/srand).
 
+### 5. Gerenciador_de_Structs_com_Ponteiros.c
+* **O que faz:** O que faz: Gerenciador de coordenadas cartesianas (X e Y) para simulação de posicionamento em 2D. Permite definir valores iniciais, realizar movimentação relativa (soma vetorial), inverter polaridades e trocar
+eixos, tudo controlado por um menu interativo com sistema de proteção contra entradas inválidas e estados nulos.
+* **Conceitos aplicados:** Manipulação de Structs, passagem de parâmetros por referência (Ponteiros), controle de fluxo (Loop while e switch), Lógica de Estados (Flags), uso de continue para
+otimização de fluxo e Programação Defensiva (tratamento de memória não inicializada e validação de inputs).
+
 ## 📚 Exercícios e Fundamentos
 
 A pasta `Exercicios_Logica` contém implementações de algoritmos clássicos e conceitos fundamentais de C (Listas Ligadas, Fatorial, Fibonacci, etc.).
