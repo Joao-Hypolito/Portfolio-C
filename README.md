@@ -28,8 +28,13 @@ alvos específicos para ataques com cálculo de dano aleatório (fator sorte/dad
 ### 5. Gerenciador_de_Structs_com_Ponteiros.c
 * **O que faz:** O que faz: Gerenciador de coordenadas cartesianas (X e Y) para simulação de posicionamento em 2D. Permite definir valores iniciais, realizar movimentação relativa (soma vetorial), inverter polaridades e trocar
 eixos, tudo controlado por um menu interativo com sistema de proteção contra entradas inválidas e estados nulos.
-* **Conceitos aplicados:** Manipulação de Structs, passagem de parâmetros por referência (Ponteiros), controle de fluxo (Loop while e switch), Lógica de Estados (Flags), uso de continue para
-otimização de fluxo e Programação Defensiva (tratamento de memória não inicializada e validação de inputs).
+* **Conceitos aplicados:** Manipulação de Structs, passagem de parâmetros por referência (Ponteiros), controle de fluxo (Loop while e switch), Lógica de
+
+### 6. O_Primeiro_Cracha.c
+* **O que faz:** O que faz: Sistema interativo para criação e registro de fichas de personagem para RPG. Captura e processa nomes compostos removendo caracteres de controle do buffer, oferece um menu de seleção de classes
+com mapeamento automático de escolhas numéricas para descrições textuais e realiza a atribuição de níveis. O fluxo é protegido por um loop de validação que impede o avanço com opções inexistentes.
+* **Conceitos aplicados:** Definição e instância de Structs (Tipos Compostos), Manipulação Avançada de Strings (fgets, strcpy, strcspn), Lógica de Validação de Input (Loop do-while com Operadores Lógicos ||),
+Estruturas de Seleção (switch-case) e Tratamento de Buffer de Entrada (limpeza de \n).
 
 ## 📚 Fundamentos
 
